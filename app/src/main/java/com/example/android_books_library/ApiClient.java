@@ -2,10 +2,10 @@ package com.example.android_books_library;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+//This is the API client
 public class ApiClient {
     private static final String BASE_URL = "https://openlibrary.org/api/";
-    private static Retrofit retrofit = null;
+    public static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
         if (retrofit == null) {

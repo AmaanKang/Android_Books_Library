@@ -1,21 +1,27 @@
 package com.example.android_books_library;
 
 public class Book {
-    private String title;
-    private String author;
-    private String imageUrl;
+    private final String title;
+    private final String author;
+    private final String imageUrl;
+
+    public Book(String title, String author, String imageUrl) {
+        this.title = title;
+        this.author = author;
+        this.imageUrl = imageUrl;
+    }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
     public String getImageUrl() {
-        return this.imageUrl;
+        return imageUrl;
     }
-    // getters and setters
 }
+
 
