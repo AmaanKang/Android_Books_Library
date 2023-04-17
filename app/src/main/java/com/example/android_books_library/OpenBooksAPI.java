@@ -1,12 +1,13 @@
 package com.example.android_books_library;
 
-import java.util.List;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface OpenBooksAPI {
-    @GET("books")
-    Call<List<Book>> getBooks();
+    @GET("search.json")
+    Call<JsonObject> searchBooks(@Query("q") String query);
 }
 

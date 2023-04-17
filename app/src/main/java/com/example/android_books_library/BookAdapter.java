@@ -1,5 +1,6 @@
 package com.example.android_books_library;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +16,31 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
+    private final Context context;
     private final List<Book> bookList;
 
-    public BookAdapter(List<Book> bookList) {
+    public BookAdapter(Context context, List<Book> bookList) {
+        this.context = context;
         this.bookList = bookList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.book_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Book book = bookList.get(position);
+
         holder.titleTextView.setText(book.getTitle());
         holder.authorTextView.setText(book.getAuthor());
-        Picasso.get().load(book.getImageUrl()).into(holder.imageView);
+
+        if (book.getImageUrl() != null) {
+            Picasso.get().load(book.getImageUrl()).into(holder.bookImageView);
+        }
     }
 
     @Override
@@ -42,16 +49,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        public ImageView bookImageView;
         public TextView titleTextView;
         public TextView authorTextView;
-        public ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.title_text_view);
-            authorTextView = itemView.findViewById(R.id.author_text_view);
-            imageView = itemView.findViewById(R.id.image_view);
+            bookImageView = itemView.findViewById(R.id.bookImageView);
+            titleTextView = itemView.findViewById(R.id.titleTextView);
+            authorTextView = itemView.findViewById(R.id.authorTextView);
         }
     }
 }
