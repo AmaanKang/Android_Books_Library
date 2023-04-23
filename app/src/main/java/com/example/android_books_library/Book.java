@@ -1,27 +1,22 @@
 package com.example.android_books_library;
 
 public class Book {
-    private final String title;
-    private final String author;
-    private final String imageUrl;
-
-    public Book(String title, String author, String imageUrl) {
-        this.title = title;
-        this.author = author;
-        this.imageUrl = imageUrl;
-    }
+    private String title;
+    //private List<String> authors;
+    private String description;
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
+    /**
+     * public List<String> getAuthors() {
+     * return this.authors;
+     * }
+     */
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getDescription() {
+        return this.description;
     }
 }
-
 
