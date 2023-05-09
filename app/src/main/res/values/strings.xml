@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Books Library</string>
+    <string name="read_button_text">Read the book</string>
 </resources>
