@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:scrollbars="vertical" />
 
     <!-- Define the layout for a single item in the ListView -->
     <RelativeLayout
