@@ -1,6 +1,9 @@
 package com.example.android_books_library;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ public class BookDetail extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         String author = getIntent().getStringExtra("author");
         String coverUrl = getIntent().getStringExtra("coverUrl");
+        String bookUrl = getIntent().getStringExtra("bookUrl");
         TextView titleTextView = findViewById(R.id.book_title);
         TextView authorTextView = findViewById(R.id.author_name);
         ImageView coverImageView = findViewById(R.id.book_cover);
@@ -25,5 +29,17 @@ public class BookDetail extends AppCompatActivity {
         authorTextView.setText(author);
         Picasso.get().load(coverUrl).into(coverImageView);
 
+        // Find the "Read the book" button in the layout
+        Button readButton = findViewById(R.id.readButton);
+
+        // Set an OnClickListener on the button to open the web view
+        readButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookDetail.this, WebViewActivity.class);
+                intent.putExtra("url", bookUrl);
+                startActivity(intent);
+            }
+        });
     }
 }
