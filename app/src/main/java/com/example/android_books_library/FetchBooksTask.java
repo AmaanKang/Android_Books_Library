@@ -62,7 +62,10 @@ public class FetchBooksTask extends AsyncTask<Void, Void, List<Book>> {
                     String coverUrl = doc.has("cover_i") ? "https://covers.openlibrary.org/b/id/" + doc.get("cover_i").getAsString() + "-L.jpg" : "Unknown";
                     System.out.println("Cover URL: " + coverUrl);
 
-                    book = new Book(title, author, "", coverUrl);
+                    String bookUrl = "https://openlibrary.org/" + doc.get("key").getAsString();
+                    System.out.println("Book Url: " + bookUrl);
+
+                    book = new Book(title, author, "", coverUrl, bookUrl, "");
                     books.add(book);
                 }
             } else {
@@ -94,7 +97,7 @@ public class FetchBooksTask extends AsyncTask<Void, Void, List<Book>> {
                     intent.putExtra("title", selectedBook.getTitle());
                     intent.putExtra("author", selectedBook.getAuthor());
                     intent.putExtra("coverUrl", selectedBook.getCoverUrl());
-
+                    intent.putExtra("bookUrl", selectedBook.getBookUrl());
                     // Start the detail activity
                     FetchBooksTask.this.context.startActivity(intent);
                 }
