@@ -41,7 +41,7 @@ public class BookListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Inflate the XML layout for a single item in the ListView
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_book, parent, false);
         }
 
         // Get references to the views in the layout
