@@ -21,20 +21,25 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FetchBooksTask extends AsyncTask<Void, Void, List<Book>> {
+public class FetchBooksTask extends AsyncTask<String, Void, List<Book>> {
     private final Context context;
     private final ListView listView;
 
-    public FetchBooksTask(Context context, ListView listView) {
+    private final List<Book> bookList;
+    private final BookListAdapter bookListAdapter;
+
+    public FetchBooksTask(Context context, List<Book> bookList, BookListAdapter bookListAdapter, ListView listView) {
         this.context = context;
         this.listView = listView;
+        this.bookList = bookList;
+        this.bookListAdapter = bookListAdapter;
     }
 
     @Override
-    protected List<Book> doInBackground(Void... voids) {
+    protected List<Book> doInBackground(String... params) {
         List<Book> books = new ArrayList<Book>();
         try {
-            URL url = new URL("https://openlibrary.org/search.json?q=the+fellowship+of+the+rings");
+            URL url = new URL(params[0]);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -81,9 +86,12 @@ public class FetchBooksTask extends AsyncTask<Void, Void, List<Book>> {
     @Override
     protected void onPostExecute(List<Book> books) {
         if (books != null) {
-            List<Book> bookList = books;
-            BookListAdapter adapter = new BookListAdapter(this.context, bookList);
-            listView.setAdapter(adapter);
+            bookList.clear();
+            bookList.addAll(books);
+
+            // Notify the adapter that the data has changed
+            bookListAdapter.notifyDataSetChanged();
+            listView.setAdapter(bookListAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
